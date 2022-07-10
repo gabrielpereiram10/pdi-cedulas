@@ -17,17 +17,16 @@ if __name__ == "__main__":
     # teste = matcher(descriptors1=result_img1['descriptors'], descriptors2=result_img2['descriptors'], descriptor="BRISK")
 
     images_ref = []
-    folder_ref = 'reference'
+    folder_ref = 'reference-images'
     for filename in os.listdir(folder_ref):
         images_ref.append(folder_ref+'/'+filename)
 
     images_teste = []
-    folder_teste = 'testes'
+    folder_teste = 'teste-images'
     for filename in os.listdir(folder_teste):
         images_teste.append(folder_teste+'/'+filename)
 
     descriptors = ['BRISK']
-    
 
     for descriptor in descriptors:
         k = 800
@@ -36,17 +35,13 @@ if __name__ == "__main__":
         fn = 0
         vn = 0
         for image_ref in images_ref:
-
-            
-
             for image_teste in images_teste:
-                # print("[i] REF: ", image_ref)
-                # print("[i] TESTE: ", image_teste)
-
-                if(descriptor=='BRISK'):
+                print("[i] REF: ", image_ref)
+                print("[i] TESTE: ", image_teste)
+                if(descriptor == 'BRISK'):
                     result_ref = method_brisk(image_ref)
                     result_test = method_brisk(image_teste)
-                elif(descriptor=='SURF'):
+                elif(descriptor == 'SURF'):
                     result_ref = method_surf(image_ref)
                     result_test = method_surf(image_teste)
                 else:
@@ -55,7 +50,7 @@ if __name__ == "__main__":
 
                 result_matcher = matcher(descriptors1=result_ref['descriptors'], descriptors2=result_test['descriptors'], descriptor=descriptor)
 
-                # print("[i] MATCHER: ", result_matcher)
+                print("[i] MATCHER: ", result_matcher)
 
                 if(result_matcher >= k):
                     if(image_ref.split('/')[1].split('_')[0] == image_teste.split('/')[1].split('_')[0]):
