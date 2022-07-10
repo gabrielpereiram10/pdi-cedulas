@@ -17,14 +17,19 @@ from image import Image
 
 
 def gaus_noise(image: Image):
-    row, col, _ = image.file.shape
+    # row, col, _ = image.file.shape
     # Gaussian distribution parameters
-    mean = 0
-    var = 0.1
-    sigma = var ** 0.5
-    gaussian = np.random.normal(mean, sigma, (row, col, 1))
-    gaussian = np.concatenate([gaussian, gaussian, gaussian], axis=2)
-    return cv2.addWeighted(image.file, 0.75, 0.25 * gaussian, 0.25, 0)
+    # mean = 0
+    # var = 0.1
+    # sigma = var ** 0.5
+    # gaussian = np.random.normal(mean, sigma, (row, col, 1))
+    # gaussian = np.concatenate([gaussian, gaussian, gaussian], axis=2)
+    gaussian = cv2.GaussianBlur(image.file, (5, 5), 0) 
+    return gaussian
+
+def median_blur(image: Image):
+    median = cv2.medianBlur(image.file, 5) 
+    return median
 
 
 def sp_noise(image: Image, prob):
@@ -32,6 +37,7 @@ def sp_noise(image: Image, prob):
     Add salt and pepper noise to image
     prob: Probability of the noise
     '''
+
     output = np.zeros(image.file.shape, np.uint8)
     thres = 1 - prob
     for i in range(image.file.shape[0]):
