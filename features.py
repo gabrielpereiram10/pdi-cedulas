@@ -1,12 +1,20 @@
 
 # Imports
 import cv2 as cv
+from utils import read_images, write_images
 
 # Call function matcher
-def matcher(descriptors1,
+def matcher(
+            image1,
+            image2,
+            keypoints1,
+            keypoints2,
+            descriptors1,
             descriptors2,
             descriptor):
 
+    # img1 = cv.imread(filename = image1, flags = cv.IMREAD_GRAYSCALE)
+    # img2 = cv.imread(filename = image2, flags = cv.IMREAD_GRAYSCALE)
     # Se descritor for um Descritor de Recursos Locais utilizar NOME
     if (descriptor == 'SURF'):
         normType = cv.NORM_L2
@@ -24,13 +32,16 @@ def matcher(descriptors1,
     # # Sort them in the order of their distance
     # matches = sorted(matches, key = lambda x: x.distance)
 
-    # # Draw first 30 matches
-    # globals.output = cv.drawMatches(img1 = image1,
-    #                                 keypoints1 = keypoints1,
-    #                                 img2 = image2,
-    #                                 keypoints2 = keypoints2,
-    #                                 matches1to2 = matches[:30],
-    #                                 outImg = None,
-    #                                 flags = cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+    # # image = img2.copy()
+
+
+    # image = cv.drawMatches(img1, keypoints1, img2, keypoints2, matches, None, flags=2)
+
+
+    # full_file_name = f'results/{image1}_{image2}'
+    # cv.imwrite(full_file_name, image)
+
+
 
     return len(matches)
+

@@ -22,14 +22,14 @@ if __name__ == "__main__":
         images_ref.append(folder_ref+'/'+filename)
 
     images_teste = []
-    folder_teste = 'teste-images'
+    folder_teste = 'teste'
     for filename in os.listdir(folder_teste):
         images_teste.append(folder_teste+'/'+filename)
 
     descriptors = ['BRISK']
 
     for descriptor in descriptors:
-        k = 800
+        k = 1000
         vp = 0
         fp = 0
         fn = 0
@@ -48,7 +48,15 @@ if __name__ == "__main__":
                     result_ref = method_fast(image_ref)
                     result_test = method_fast(image_teste)
 
-                result_matcher = matcher(descriptors1=result_ref['descriptors'], descriptors2=result_test['descriptors'], descriptor=descriptor)
+                result_matcher = matcher(
+                    image1=image_ref,
+                    image2=image_teste,
+                    keypoints1=result_ref['keypoints'],
+                    keypoints2=result_test['keypoints'],
+                    descriptors1=result_ref['descriptors'], 
+                    descriptors2=result_test['descriptors'], 
+                    descriptor=descriptor
+                )
 
                 print("[i] MATCHER: ", result_matcher)
 

@@ -22,6 +22,7 @@ def main():
         #     note=image.note
         # )
         # all_images.append(gau_image)
+
         median = Image(
             file=median_blur(image),
             filename=f'{filename}_mediana.{ext}',
@@ -78,5 +79,20 @@ def main():
 
     write_images("teste-images/", all_images)
 
+def main2():
+    images = read_images("teste-images/")
+    all_images = []
+    for image in images:
+        filename, ext = image.filename.split(".")
+        noiseless = Image(
+            file=cv2.fastNlMeansDenoising(image.file, None, 20, 7, 21),
+            filename=f'{filename}_noiseless.{ext}',
+            note=image.note
+        )
+        all_images.append(noiseless)
+    
+    write_images("teste-images-noiseless2/", all_images)
 
-main()
+    
+
+main2()
