@@ -22,14 +22,14 @@ if __name__ == "__main__":
         images_ref.append(folder_ref+'/'+filename)
 
     images_teste = []
-    folder_teste = 'teste'
+    folder_teste = 'images_good'
     for filename in os.listdir(folder_teste):
         images_teste.append(folder_teste+'/'+filename)
 
     descriptors = ['BRISK']
 
     for descriptor in descriptors:
-        k = 1000
+        k = 850
         vp = 0
         fp = 0
         fn = 0

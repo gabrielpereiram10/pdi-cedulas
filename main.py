@@ -10,7 +10,7 @@ def main():
     # images.extend(rotatted_images)
     # write_images("reference-images/", images)
 
-    images = read_images("teste/")
+    images = read_images("images_good/")
     all_images = images.copy()
     for image in images:
         filename, ext = image.filename.split(".")
@@ -77,7 +77,7 @@ def main():
         # )
         # all_images.append(speckle_image)
 
-    write_images("teste-images/", all_images)
+    write_images("images_good_pos/", all_images)
 
 def main2():
     images = read_images("teste-images/")
@@ -95,4 +95,4 @@ def main2():
 
     
 
-main2()
+main()
